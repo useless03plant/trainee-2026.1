@@ -30,28 +30,19 @@
       --white:#ffffff;
     }
 
-    /* =========================
-       HIGHLIGHT BAR
-    ========================== */
+    /* LINHA AZUL */
 
     .highlight-bar{
       width:100%;
+      height:10px;
       background:#062349;
-      color:white;
-      text-align:center;
-      padding:10px 20px;
-      font-size:14px;
-      letter-spacing:1px;
       position:fixed;
       top:0;
       left:0;
       z-index:1000;
-      border-bottom:2px solid #2f72ff;
     }
 
-    /* =========================
-       HERO
-    ========================== */
+    /* HERO */
 
     .hero{
       width:100%;
@@ -75,7 +66,7 @@
       justify-content:space-between;
       align-items:center;
       position:fixed;
-      top:42px;
+      top:10px;
       left:0;
       z-index:999;
       background:rgba(0,0,0,.25);
@@ -158,16 +149,14 @@
       border-radius:20px;
     }
 
-    /* =========================
-       HERO CONTENT
-    ========================== */
+    /* HERO CONTENT */
 
     .hero-content{
       width:100%;
       min-height:100vh;
       display:flex;
       align-items:center;
-      padding:180px 60px 80px;
+      padding:160px 60px 80px;
     }
 
     .hero-left{
@@ -232,9 +221,7 @@
       font-size:18px;
     }
 
-    /* =========================
-       FORMULÁRIO
-    ========================== */
+    /* FORMULÁRIO */
 
     .form-section{
       padding:100px 30px;
@@ -314,9 +301,7 @@
       color:#4b86ff;
     }
 
-    /* =========================
-       MODAL VÍDEO
-    ========================== */
+    /* MODAL VÍDEO */
 
     .video-modal{
       position:fixed;
@@ -360,9 +345,7 @@
       z-index:10;
     }
 
-    /* =========================
-       FOOTER
-    ========================== */
+    /* FOOTER */
 
     footer{
       padding:35px;
@@ -371,9 +354,7 @@
       color:#aaa;
     }
 
-    /* =========================
-       RESPONSIVO
-    ========================== */
+    /* RESPONSIVO */
 
     @media(max-width:900px){
 
@@ -398,7 +379,7 @@
       }
 
       .hero-content{
-        padding:190px 30px 80px;
+        padding:170px 30px 80px;
       }
 
       .hero-title{
@@ -410,10 +391,6 @@
 
       .topbar{
         padding:18px 20px;
-      }
-
-      .highlight-bar{
-        font-size:11px;
       }
 
       .hero-title{
@@ -434,11 +411,9 @@
 
 <body>
 
-  <!-- BARRA SUPERIOR -->
+  <!-- LINHA AZUL -->
 
-  <div class="highlight-bar">
-    MATRÍCULAS ABERTAS 2026 • EDUCAÇÃO ADVENTISTA • ENSINO DE QUALIDADE
-  </div>
+  <div class="highlight-bar"></div>
 
   <!-- HERO -->
 
@@ -497,257 +472,6 @@
     </div>
 
   </section>
-
-  <!-- FORMULÁRIO -->
-
-  <section class="form-section" id="matriculas">
-
-    <div class="container">
-
-      <h2 class="section-title">
-        Envie sua mensagem
-      </h2>
-
-      <div class="form-area">
-
-        <div class="input-group">
-
-          <input
-            type="text"
-            id="name"
-            placeholder="Seu nome"
-          >
-
-          <textarea
-            id="message"
-            placeholder="Digite sua mensagem">
-          </textarea>
-
-          <button onclick="saveMessage()">
-            Enviar Mensagem
-          </button>
-
-        </div>
-
-        <div class="messages" id="messages"></div>
-
-      </div>
-
-    </div>
-
-  </section>
-
-  <footer>
-    © 2026 IAPE - Todos os direitos reservados.
-  </footer>
-
-  <!-- MODAL VÍDEO -->
-
-  <div class="video-modal" id="videoModal">
-
-    <div class="video-box">
-
-      <button class="close-modal" id="closeModal">
-        ✕
-      </button>
-
-      <iframe
-        id="videoFrame"
-        src=""
-        allowfullscreen>
-      </iframe>
-
-    </div>
-
-  </div>
-
-  <script>
-
-    /* =====================================
-       COLE A URL DO APPS SCRIPT AQUI
-    ===================================== */
-
-    const CONFIG = {
-
-      WEB_APP_URL:
-      "https://script.google.com/macros/s/AKfycbxK0CH-BFI5MmXkTrP5003a91tB1bdSeTYr5-HQi4VjW5_qR4TW_brIunbGK-vdJdCnxQ/exec"
-
-    };
-
-    /* MENU MOBILE */
-
-    const menuToggle = document.getElementById("menuToggle");
-    const menu = document.getElementById("menu");
-
-    menuToggle.addEventListener("click", () => {
-      menu.classList.toggle("active");
-    });
-
-    /* HEADER SCROLL */
-
-    const topbar = document.getElementById("topbar");
-
-    window.addEventListener("scroll", () => {
-
-      if(window.scrollY > 50){
-        topbar.classList.add("scrolled");
-      }else{
-        topbar.classList.remove("scrolled");
-      }
-
-    });
-
-    /* VÍDEO */
-
-    const playVideo = document.getElementById("playVideo");
-    const videoModal = document.getElementById("videoModal");
-    const closeModal = document.getElementById("closeModal");
-    const videoFrame = document.getElementById("videoFrame");
-
-    playVideo.addEventListener("click", () => {
-
-      videoModal.style.display = "flex";
-
-      videoFrame.src =
-      "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1";
-
-    });
-
-    closeModal.addEventListener("click", () => {
-
-      videoModal.style.display = "none";
-      videoFrame.src = "";
-
-    });
-
-    videoModal.addEventListener("click", (e) => {
-
-      if(e.target === videoModal){
-
-        videoModal.style.display = "none";
-        videoFrame.src = "";
-
-      }
-
-    });
-
-    /* JSONP */
-
-    function jsonp(url){
-
-      return new Promise((resolve, reject) => {
-
-        const callbackName =
-        "jsonp_callback_" + Math.round(100000 * Math.random());
-
-        window[callbackName] = function(data){
-
-          delete window[callbackName];
-          document.body.removeChild(script);
-
-          resolve(data);
-        };
-
-        const script = document.createElement("script");
-
-        script.src =
-        url + (url.includes("?") ? "&" : "?") +
-        "callback=" + callbackName;
-
-        script.onerror = function(){
-
-          delete window[callbackName];
-          document.body.removeChild(script);
-
-          reject("Erro JSONP");
-
-        };
-
-        document.body.appendChild(script);
-
-      });
-
-    }
-
-    /* SALVAR */
-
-    async function saveMessage(){
-
-      const name =
-      document.getElementById("name").value.trim();
-
-      const message =
-      document.getElementById("message").value.trim();
-
-      if(!name || !message){
-
-        alert("Preencha todos os campos.");
-        return;
-
-      }
-
-      try{
-
-        await jsonp(
-
-          `${CONFIG.WEB_APP_URL}?action=add&name=${encodeURIComponent(name)}&message=${encodeURIComponent(message)}`
-
-        );
-
-        document.getElementById("name").value = "";
-        document.getElementById("message").value = "";
-
-        loadMessages();
-
-        alert("Mensagem enviada com sucesso!");
-
-      }catch(error){
-
-        alert("Erro ao salvar.");
-
-      }
-
-    }
-
-    /* LISTAR */
-
-    async function loadMessages(){
-
-      try{
-
-        const data = await jsonp(
-
-          `${CONFIG.WEB_APP_URL}?action=list`
-
-        );
-
-        const container =
-        document.getElementById("messages");
-
-        container.innerHTML = "";
-
-        data.forEach(item => {
-
-          container.innerHTML += `
-            <div class="message-item">
-              <strong>${item.name}</strong>
-              <div>${item.message}</div>
-            </div>
-          `;
-
-        });
-
-      }catch(error){
-
-        console.error(error);
-
-      }
-
-    }
-
-    loadMessages();
-
-  </script>
 
 </body>
 </html>
